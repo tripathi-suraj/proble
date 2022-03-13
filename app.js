@@ -26,7 +26,6 @@ setTimeout(() => {
 }, 500);
 
 // Intentionally cause an exception, but don't catch it.
-console.log('This will not run.');
 var app = express();
 process.app = app;
 
@@ -44,4 +43,4 @@ try {
   console.log(e);
 }
 
-app.listen(app.get('PORT'));
+http.createServer(app).listen(app.get('PORT'));

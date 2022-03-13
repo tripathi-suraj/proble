@@ -3,6 +3,7 @@ var fs = require('fs');
 var cluster = require('cluster');
 var express = require('express');
 var ejs = require('ejs');
+var bodyParser = require('body-parser');
 
 process.on('beforeExit', (code) => {
   console.log('Process beforeExit event with code: ', code);
@@ -36,9 +37,11 @@ app.set('PORT', 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 console.log(fs.existsSync(app.vars.basepath + '/env'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 try {
   require('./routes/index').attachRoute(app);
+  require('./routes/user').attachRoute(app);
 } catch (e) {
   console.log(e);
 }

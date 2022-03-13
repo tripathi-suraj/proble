@@ -4,6 +4,8 @@ var cluster = require('cluster');
 var express = require('express');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
+var path = require('path');
+var cookieParser = require('cookie-parser');
 
 process.on('beforeExit', (code) => {
   console.log('Process beforeExit event with code: ', code);
@@ -37,7 +39,9 @@ app.set('PORT', 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 console.log(fs.existsSync(app.vars.basepath + '/env'));
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 try {
   require('./routes/index').attachRoute(app);

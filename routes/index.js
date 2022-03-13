@@ -1,7 +1,7 @@
 var routes = {};
 
 routes.home = function (req, res) {
-  res.render('home', { title: 'Home Api' });
+  res.render('index', { title: 'Home Api' });
 };
 
 routes.version = function (req, res) {
